@@ -4,11 +4,11 @@
     <!-- <input v-model="value"  placeholder="year"/> -->
     <input type="button" value="submit" @click="fetchData" />
 
-    <!-- <ul>
-      <li v-for="movie in movies">
-        {{movie.Title}} - {{movie.year}}
+    <ul>
+      <li v-for="movie in this.$store.state.movies" :key="movie.Title">
+        {{movie.Title}} 
       </li>
-    </ul>-->
+    </ul>
   </div>
 </template>
 <script>

@@ -10,27 +10,25 @@ export const store = new Vuex.Store({
   mutations: {
     updateValue(state, title) {
       state.title = title;
+    },
+    FETCH_MOVIES(state, movies) {
+      state.movies = movies;
+      state.title = ""
     }
   },
 
 
   actions: {
-    fetchData: function() {
+    fetchData: function () {
       const myRequest = new Request(
-        `http://www.omdbapi.com/?apikey=95f0a4a0&${this.state.title}`
+        `http://www.omdbapi.com/?apikey=e62e1d19&s=${this.state.title}`
       );
 
       fetch(myRequest)
-        .then(success => {
-          success.json();
-        })
-        .then(movies => {
-          // eslint-disable-next-line
-          console.log(movies);
-        })
-        .catch(error => {
-          // eslint-disable-next-line
-          console.log(error);
+        .then(function (response) {
+          return response.json();
+        }).then((result) => {
+          this.commit("FETCH_MOVIES", result.Search);
         });
     }
   }
